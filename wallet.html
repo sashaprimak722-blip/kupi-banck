@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кошелёк — KUPI Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="wallet-page">
+
+    <div class="wallet-container">
+        <!-- Шапка с приветствием и IP -->
+        <header class="wallet-header">
+            <div>
+                <h2>Привет, <span id="userNick">Пользователь</span>!</h2>
+                <p id="userIP" style="font-size:0.8rem; color:#64748b;">IP: загрузка...</p>
+            </div>
+            <button id="logoutBtn" class="btn btn-rules" style="background:#ef4444; padding:10px 15px;">Выйти</button>
+        </header>
+
+        <!-- Балансы -->
+        <div class="balances-grid">
+            <div class="balance-card rub">
+                <span>🇷🇺 Рубли</span>
+                <h3 id="balanceRub">0.00 ₽</h3>
+            </div>
+            <div class="balance-card usd">
+                <span>🇺🇸 Доллары</span>
+                <h3 id="balanceUsd">0.00 $</h3>
+            </div>
+            <div class="balance-card eur">
+                <span>🇪🇺 Евро</span>
+                <h3 id="balanceEur">0.00 €</h3>
+            </div>
+            <div class="balance-card btc">
+                <span>₿ Биткоин</span>
+                <h3 id="balanceBtc">0.00000000 ₿</h3>
+            </div>
+        </div>
+
+        <!-- Вкладки -->
+        <div class="wallet-tabs">
+            <button class="tab-btn active" onclick="switchTab('promo')">🎁 Промокоды</button>
+            <button class="tab-btn" onclick="switchTab('transfer')">💸 Перевод</button>
+            <button class="tab-btn" onclick="switchTab('referral')">👥 Рефералы</button>
+        </div>
+
+        <!-- Вкладка: Промокоды -->
+        <div id="tab-promo" class="tab-content active">
+            <h3>Активация промокода</h3>
+            <div class="input-group">
+                <input type="text" id="promoInput" placeholder="Введите промокод...">
+            </div>
+            <button class="btn btn-start" onclick="activatePromo()">Активировать</button>
+            <p id="promoMessage" style="margin-top:10px; font-weight:bold;"></p>
+        </div>
+
+        <!-- Вкладка: Перевод -->
+        <div id="tab-transfer" class="tab-content">
+            <h3>Перевод</h3>
+            <div class="input-group">
+                <label>Способ:</label>
+                <select id="transferMethod" style="width:100%; padding:12px; border-radius:8px; background:#0f172a; color:white; border:1px solid #334155;">
+                    <option value="internal">Внутренний перевод (по Email)</option>
+                    <option value="sbp">СБП (по номеру телефона)</option>
+                    <option value="card">Банковская карта</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Получатель (Email / Телефон / Карта):</label>
+                <input type="text" id="transferRecipient" placeholder="Введите данные">
+            </div>
+            <div class="input-group">
+                <label>Сумма (в рублях):</label>
+                <input type="number" id="transferAmount" placeholder="0">
+            </div>
+            <button class="btn btn-start" onclick="makeTransfer()">Отправить</button>
+            <p id="transferMessage" style="margin-top:10px; font-weight:bold;"></p>
+        </div>
+
+        <!-- Вкладка: Рефералы -->
+        <div id="tab-referral" class="tab-content">
+            <h3>Твоя реферальная ссылка</h3>
+            <p>Приглашай друзей и получай бонусы!</p>
+            <div class="input-group">
+                <input type="text" id="refLink" readonly style="background:#1e293b; color:#38bdf8;">
+            </div>
+            <button class="btn btn-start" onclick="copyRefLink()">Копировать ссылку</button>
+            <p style="margin-top:10px; color:#94a3b8; font-size:0.9rem;">Реферальный код: <strong id="refCode"></strong></p>
+            <p style="margin-top:5px; color:#94a3b8; font-size:0.9rem;">Приглашено: <strong id="refCount">0</strong> чел.</p>
+        </div>
+
+        <footer class="game-footer" style="margin-top:20px;">
+            <a href="index.html" class="btn btn-back">← В меню</a>
+        </footer>
+    </div>
+
+    <script src="wallet.js"></script>
+</body>
+</html>
